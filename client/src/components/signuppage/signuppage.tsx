@@ -1,8 +1,16 @@
 import styles from "./signuppage.module.scss";
 import { Avatar, Button, Card, TextField, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 
 const Signuppage = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordVerify, setPasswordVerify] = useState("");
+
+  const handleSignupClick = async () => {
+    console.log(email, password, passwordVerify);
+  };
+
   return (
     <div className={styles.loginContainer}>
       <div className={styles.loginContainerv2}>
@@ -14,6 +22,7 @@ const Signuppage = () => {
             className={styles.textfield}
             placeholder="Enter your email"
             type="email"
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
 
@@ -21,8 +30,11 @@ const Signuppage = () => {
           <Typography>PASSWORD</Typography>
           <TextField
             className={styles.textfield}
-            placeholder="Enter your password"
+            placeholder="Password"
+            variant="outlined"
             type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
 
@@ -30,12 +42,18 @@ const Signuppage = () => {
           <Typography>CONFIRM PASSWORD</Typography>
           <TextField
             className={styles.textfield}
-            placeholder="Retype your password"
+            placeholder="Confirm Password"
+            variant="outlined"
             type="password"
+            value={passwordVerify}
+            onChange={(e) => setPasswordVerify(e.target.value)}
           />
         </div>
 
-        <button className={styles.loginBTN}>REGISTER</button>
+        <button className={styles.loginBTN} onClick={handleSignupClick}>
+          REGISTER
+        </button>
+
         <span className={styles.or}>or</span>
         <button className={styles.googleBTN}>
           <i className="fa-brands fa-google"></i> Sign up with google

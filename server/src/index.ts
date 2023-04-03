@@ -3,10 +3,13 @@ config()
 
 import express, { Request, Response } from "express"
 import mongoose from "mongoose"
+import cors from "cors"
+import routes from "./routes/routes"
 
 import PostMessage from "./models/PostMessage"
 const app = express()
 
+app.use(cors())
 app.use(express.json()) //middleware
 
 const PORT  = 8080
