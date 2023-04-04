@@ -5,7 +5,7 @@ import config from "config"
 
 import User from "../models/User"
 
-const signinController = async(req,res) => {
+export const signinController = async(req,res) => {
     if(req.body.googleAccessToken){
         const {googleAccessToken} = req.body;
 
@@ -46,12 +46,12 @@ const signinController = async(req,res) => {
                 const existingUser = await User.findOne({email})
         
                 if (!existingUser) 
-                    return res.status(404).json({message: "User don't exist!"})
+                    return res.status(404).json({message: "User doesn't exist!"})
         
                 const isPasswordOk = await bcrypt.compare(password, existingUser.password);
         
                 if (!isPasswordOk) 
-                    return res.status(400).json({message: "Invalid credintials!"})
+                    return res.status(400).json({message: "Invalid credentials!"})
         
                 const token = jwt.sign({
                     email: existingUser.email,
@@ -67,8 +67,10 @@ const signinController = async(req,res) => {
                     .json({message: "Something went wrong!"})
             }
         }
+    }
 
-const signupController = async(req,res) => {
+
+export const signupController = async(req,res) => {
     if(req.body.googleAccessToken){
 
         const{googleAccessToken} = req.body;
@@ -130,4 +132,5 @@ const signupController = async(req,res) => {
         }
         
     }
+
 }
