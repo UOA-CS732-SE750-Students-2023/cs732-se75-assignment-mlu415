@@ -2,10 +2,11 @@ import bcrypt from"bcryptjs"
 import jwt from "jsonwebtoken"
 import axios  from "axios"
 import config from "config"
+import { Request,Response } from "express"
 
 import User from "../models/User"
 
-export const signinController = async(req,res) => {
+export const signinController = async(req: Request, res: Response) => {
     if(req.body.googleAccessToken){
         const {googleAccessToken} = req.body;
 
@@ -70,7 +71,7 @@ export const signinController = async(req,res) => {
     }
 
 
-export const signupController = async(req,res) => {
+export const signupController = async(req: Request, res: Response) => {
     if(req.body.googleAccessToken){
 
         const{googleAccessToken} = req.body;

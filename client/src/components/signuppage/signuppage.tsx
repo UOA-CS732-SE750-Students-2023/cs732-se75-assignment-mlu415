@@ -1,14 +1,23 @@
 import styles from "./signuppage.module.scss";
 import { Avatar, Button, Card, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { signup } from "../../redux/actions/auth";
+import { AppDispatch } from "../../redux/store";
 
 const Signuppage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordVerify, setPasswordVerify] = useState("");
 
-  const handleSignupClick = async () => {
-    console.log(email, password, passwordVerify);
+  const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleSignupClick = () => {
+    dispatch(
+      signup({ email, password, confirmPassword: passwordVerify }, navigate)
+    );
   };
 
   return (

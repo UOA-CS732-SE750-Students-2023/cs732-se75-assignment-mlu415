@@ -9,16 +9,7 @@ import thunk from "redux-thunk";
 import { BrowserRouter as Router } from "react-router-dom";
 import { createStore, applyMiddleware, compose } from "redux";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-
-const composeEnhancers =
-  (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(
-  reducers,
-  {},
-  composeEnhancers(applyMiddleware(thunk))
-);
-
-import "./index.css";
+import store from "./redux/store";
 
 ReactDOM.render(
   <React.StrictMode>

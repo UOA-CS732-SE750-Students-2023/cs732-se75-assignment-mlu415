@@ -10,7 +10,8 @@ import PostMessage from "./models/PostMessage"
 const app = express()
 
 app.use(cors())
-app.use(express.json()) //middleware
+app.use(express.json())
+app.use("/users", routes);
 
 const PORT  = 8080
 
