@@ -4,6 +4,7 @@ import { ThunkAction } from "redux-thunk";
 import { RootState } from "../reducers";
 import { AnyAction, Dispatch } from "redux";
 import { NavigateFunction } from "react-router-dom";
+import { AppDispatch } from "../store";
 
 interface SignInData {
   email: string;
@@ -11,12 +12,12 @@ interface SignInData {
 }
 
 export const signin = (data: SignInData, navigate: NavigateFunction) => async (
-  dispatch: Dispatch
+  dispatch: AppDispatch
 ) => {
   try {
     const { data: responseData } = await api.signIn(data);
     dispatch({ type: AUTH, data: responseData });
-    navigate("/");
+    navigate("/home");
   } catch (err) {
     console.log(err);
   }
@@ -37,7 +38,7 @@ export const signup = (
   try {
     const { data: responseData } = await api.signUp(formData);
     dispatch({ type: AUTH, data: responseData });
-    navigate("/");
+    navigate("/home");
   } catch (err) {
     console.log(err);
   }
