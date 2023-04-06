@@ -15,6 +15,7 @@ const Signuppage = () => {
   const navigate = useNavigate();
 
   const handleSignupClick = () => {
+    console.log({ email, password, confirmPassword: passwordVerify });
     dispatch(
       signup({ email, password, confirmPassword: passwordVerify }, navigate)
     );

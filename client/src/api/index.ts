@@ -15,7 +15,7 @@ export const signInGoogle = (accessToken: string) => API.post("/users/signin", {
     googleAccessToken: accessToken
 })
 
-export const signUp = (data: any) => API.post("/users/signup", data)
+export const signUp = (data: any) => API.post("/users/signup", { email: data.email, password: data.password })
 export const signUpGoogle = (accessToken: string) => API.post("/users/signup", {
     googleAccessToken: accessToken
 })
