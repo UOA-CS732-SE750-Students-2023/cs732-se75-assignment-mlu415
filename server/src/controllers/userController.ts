@@ -8,8 +8,6 @@ import User from "../models/User";
 dotenvConfig();
 const jwtSecret = process.env.JWT_SECRET;
 
-
-
 export const signinController = async (req: Request, res: Response) => {
   const { email, password, googleAccessToken } = req.body;
 
@@ -85,11 +83,7 @@ export const signinController = async (req: Request, res: Response) => {
 export const signupController = async (req: Request, res: Response) => {
   const { email, password, googleAccessToken } = req.body;
 
-  console.log('googleAccessToken:', googleAccessToken);
-
   if (googleAccessToken) {
-
-    console.log("MADE IT TO GOOGLE")
     try {
       const userInfoResponse = await axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
         headers: {
@@ -137,7 +131,6 @@ export const signupController = async (req: Request, res: Response) => {
       res.status(400).json({ message: "Invalid access token!" });
     }
   } else {
-    console.log("DID NOT MAKE IT TO GOOGLE")
     if (email === "" || password === "") {
       return res.status(400).json({ message: "Invalid field!" });
     }

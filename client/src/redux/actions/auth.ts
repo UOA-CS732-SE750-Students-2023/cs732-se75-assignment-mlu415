@@ -59,7 +59,7 @@ export const signinGoogle = (
   try {
     const { data: responseData } = await api.signInGoogle(accessToken);
     dispatch({ type: AUTH, data: responseData });
-    navigate("/");
+    navigate("/home");
   } catch (err) {
     console.log(err);
   }
@@ -72,13 +72,9 @@ export const signupGoogle = (
   dispatch
 ) => {
   try {
-    console.log("Google access token in actions:", accessToken);
     const { data: responseData } = await api.signUpGoogle(accessToken);
-    console.log("data in actions:",responseData);
-    const defaultPassword = "googleuser";
-    const updatedResponseData = { ...responseData, password: defaultPassword };
-    dispatch({ type: AUTH, data: updatedResponseData });
-    navigate("/");
+    dispatch({ type: AUTH, data: responseData });
+    navigate("/home");
   } catch (err) {
     console.log(err);
   }
