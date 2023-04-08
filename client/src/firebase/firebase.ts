@@ -12,8 +12,10 @@ const firebaseConfig = {
     measurementId: "G-DHG5545Z3E"
 };
 
+
 if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
-  }
-  
-  export const auth = firebase.auth();
+}
+
+export const auth = firebase.auth();
+export const googleProvider = new firebase.auth.GoogleAuthProvider();

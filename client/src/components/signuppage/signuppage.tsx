@@ -21,7 +21,7 @@ const Signuppage = () => {
     }
     try {
       await auth.createUserWithEmailAndPassword(email, password);
-      navigate("/");
+      navigate("/home");
     } catch (error: any) {
       alert(error.message);
     }
@@ -31,7 +31,7 @@ const Signuppage = () => {
     try {
       const provider = new firebase.auth.GoogleAuthProvider();
       await auth.signInWithPopup(provider);
-      navigate("/");
+      navigate("/home");
     } catch (error: any) {
       alert(error.message);
     }
@@ -77,16 +77,14 @@ const Signuppage = () => {
             />
           </div>
 
-          <Button type="submit" className={styles.loginBTN}>
-            REGISTER
-          </Button>
+          <button className={styles.loginBTN}>REGISTER</button>
         </form>
 
         <span className={styles.or}>or</span>
 
-        <Button onClick={handleGoogleSignup} className={styles.googleBTN}>
+        <button onClick={handleGoogleSignup} className={styles.googleBTN}>
           <i className="fa-brands fa-google"></i> Sign up with Google
-        </Button>
+        </button>
       </div>
     </div>
   );
