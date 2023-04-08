@@ -3,33 +3,12 @@ import { Avatar, Button, Card, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { signup, signupGoogle } from "../../redux/actions/auth";
 import { AppDispatch } from "../../redux/store";
-import { useGoogleLogin } from "@react-oauth/google";
 
 const Signuppage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordVerify, setPasswordVerify] = useState("");
-
-  const dispatch: AppDispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const handleSignupClick = () => {
-    dispatch(
-      signup({ email, password, confirmPassword: passwordVerify }, navigate)
-    );
-  };
-
-  function handleGoogleLoginSuccess(tokenResponse: {
-    access_token: string;
-  }): void {
-    const accessToken = tokenResponse.access_token;
-    console.log("Google access token in component:", accessToken);
-    dispatch(signupGoogle(accessToken, navigate));
-  }
-
-  const login = useGoogleLogin({ onSuccess: handleGoogleLoginSuccess });
 
   return (
     <div className={styles.loginContainer}>
@@ -70,12 +49,10 @@ const Signuppage = () => {
           />
         </div>
 
-        <button className={styles.loginBTN} onClick={handleSignupClick}>
-          REGISTER
-        </button>
+        <button className={styles.loginBTN}>REGISTER</button>
 
         <span className={styles.or}>or</span>
-        <button onClick={() => login()} className={styles.googleBTN}>
+        <button className={styles.googleBTN}>
           <i className="fa-brands fa-google"></i> Sign up with google
         </button>
       </div>

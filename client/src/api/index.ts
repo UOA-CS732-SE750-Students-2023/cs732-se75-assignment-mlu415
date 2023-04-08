@@ -9,11 +9,3 @@ API.interceptors.request.use((req) => {
 
   return req;
 });
-
-export const signIn = (data: any) => API.post("/users/signin", data);
-export const signInGoogle = (accessToken: string) =>
-  API.post("/users/signin", {googleAccessToken: accessToken});
-
-export const signUp = (data: any) => API.post("/users/signup", { email: data.email, password: data.password });
-export const signUpGoogle = (accessToken: string) =>
-  API.post("/users/signup", { googleAccessToken: accessToken });

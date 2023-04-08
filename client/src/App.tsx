@@ -7,8 +7,6 @@ import Signuppage from "./components/signuppage/signuppage";
 import HomePage from "./components/homepage/homepage";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <Routes>
       <Route path="/" element={<LoginPage />} />
