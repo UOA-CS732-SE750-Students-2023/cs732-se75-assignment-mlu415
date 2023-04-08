@@ -68,10 +68,16 @@ export const signinGoogle = (
 export const signupGoogle = (
   accessToken: string,
   navigate: NavigateFunction
-) => async (dispatch: Dispatch) => {
+): ThunkAction<Promise<void>, RootState, unknown, AnyAction> => async (
+  dispatch
+) => {
   try {
+    console.log("Google access token in actions:", accessToken);
     const { data: responseData } = await api.signUpGoogle(accessToken);
-    dispatch({ type: AUTH, data: responseData });
+    console.log("data in actions:",responseData);
+    const defaultPassword = "googleuser";
+    const updatedResponseData = { ...responseData, password: defaultPassword };
+    dispatch({ type: AUTH, data: updatedResponseData });
     navigate("/");
   } catch (err) {
     console.log(err);

@@ -25,6 +25,7 @@ const Signuppage = () => {
     access_token: string;
   }): void {
     const accessToken = tokenResponse.access_token;
+    console.log("Google access token in component:", accessToken);
     dispatch(signupGoogle(accessToken, navigate));
   }
 

@@ -84,55 +84,60 @@ export const signinController = async (req: Request, res: Response) => {
 };
 export const signupController = async (req: Request, res: Response) => {
   const { email, password, googleAccessToken } = req.body;
+
+  console.log('googleAccessToken:', googleAccessToken);
+
   if (googleAccessToken) {
-    axios
-      .get("https://www.googleapis.com/oauth2/v3/userinfo", {
+
+    console.log("MADE IT TO GOOGLE")
+    try {
+      const userInfoResponse = await axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
         headers: {
           Authorization: `Bearer ${googleAccessToken}`,
         },
-      })
-      .then(async (response) => {
-        const email = response.data.email;
+      });
+      const email = userInfoResponse.data.email;
 
-        const existingUser = await User.findOne({ email });
-
-        if (existingUser) {
-          const token = jwt.sign(
-            {
-              email: existingUser.email,
-              id: existingUser._id,
-            },
-            jwtSecret,
-            { expiresIn: "1h" }
-          );
-          return res.status(400).json({
-            message: "User already exists!",
-            result: existingUser,
-            token,
-          });
-        }
-
-        const result = await User.create({
-          verified: true,
-          email,
-          role: "default",
-        });
-
+      let existingUser = await User.findOne({ email });
+      if (existingUser) {
         const token = jwt.sign(
           {
-            email: result.email,
-            id: result._id,
+            email: existingUser.email,
+            id: existingUser._id,
           },
           jwtSecret,
           { expiresIn: "1h" }
         );
+        return res.status(400).json({
+          message: "User already exists!",
+          result: existingUser,
+          token,
+        });
+      }
 
-        res.status(200).json({ result, token });
-      })
-      .catch((err) => {
-        res.status(400).json({ message: "Invalid access token!" });
+      const newUser = await User.create({
+        verified: true,
+        email,
+        role: "default",
       });
+
+      // create JWT token
+      const token = jwt.sign(
+        {
+          email: newUser.email,
+          id: newUser._id,
+        },
+        jwtSecret,
+        { expiresIn: "1h" }
+      );
+
+      res.status(200).json({ result: newUser, token });
+    } catch (err) {
+      console.log(err);
+      res.status(400).json({ message: "Invalid access token!" });
+    }
   } else {
+    console.log("DID NOT MAKE IT TO GOOGLE")
     if (email === "" || password === "") {
       return res.status(400).json({ message: "Invalid field!" });
     }
@@ -163,23 +168,24 @@ export const signupController = async (req: Request, res: Response) => {
 
       const hashedPassword = await bcrypt.hash(password, 12);
 
-      const result = await User.create({
+      const newUser = await User.create({
         verified: true,
         email,
         password: hashedPassword,
         role: "default",
       });
 
+      // create JWT token
       const token = jwt.sign(
         {
-          email: result.email,
-          id: result._id,
+          email: newUser.email,
+          id: newUser._id,
         },
         jwtSecret,
         { expiresIn: "1h" }
       );
 
-      res.status(200).json({ result, token });
+      res.status(200).json({ result: newUser, token });
     } catch (err) {
       console.log(err);
       res.status(500).json({ message: "Something went wrong!" });
