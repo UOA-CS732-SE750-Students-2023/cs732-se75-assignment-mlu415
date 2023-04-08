@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./loginpage.module.scss";
 import { auth, googleProvider } from "../../firebase/firebase";
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ const LoginPage = () => {
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      await auth.signInWithEmailAndPassword(email, password);
+      await signInWithEmailAndPassword(auth, email, password);
       navigate("/home");
     } catch (error: any) {
       alert(error.message);
@@ -21,7 +22,7 @@ const LoginPage = () => {
 
   const handleGoogleSignin = async () => {
     try {
-      await auth.signInWithPopup(googleProvider);
+      await signInWithPopup(auth, googleProvider);
       navigate("/home");
     } catch (error: any) {
       alert(error.message);

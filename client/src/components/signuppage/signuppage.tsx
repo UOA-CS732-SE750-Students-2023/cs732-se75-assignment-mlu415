@@ -2,10 +2,9 @@ import { Button, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./signuppage.module.scss";
-import { auth } from "../../firebase/firebase";
-import firebase from "firebase/compat/app";
-import "firebase/compat/auth";
-import "firebase/compat/firestore";
+import { auth, firestore, googleProvider } from "../../firebase/firebase";
+import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 
 const Signuppage = () => {
   const navigate = useNavigate();
@@ -20,7 +19,13 @@ const Signuppage = () => {
       return;
     }
     try {
-      await auth.createUserWithEmailAndPassword(email, password);
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      await setDoc(doc(firestore, "users", user.uid), { role: "user" });
       navigate("/home");
     } catch (error: any) {
       alert(error.message);
@@ -29,9 +34,16 @@ const Signuppage = () => {
 
   const handleGoogleSignup = async () => {
     try {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      await auth.signInWithPopup(provider);
-      navigate("/home");
+      const userCredential = await signInWithPopup(auth, googleProvider);
+      const user = userCredential.user;
+      const userDoc = doc(firestore, "users", user.uid);
+
+      if ((await getDoc(userDoc)).exists()) {
+        navigate("/home");
+      } else {
+        await setDoc(userDoc, { role: "user" });
+        navigate("/home");
+      }
     } catch (error: any) {
       alert(error.message);
     }
