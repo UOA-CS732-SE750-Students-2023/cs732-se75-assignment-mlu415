@@ -21,9 +21,10 @@ git clone https://github.com/UOA-CS732-SE750-Students-2023/cs732-se75-assignment
 
 ### 2. Install the dependencies.
 
+```
 cd client
-
 npm install
+```
 
 ### 3. Setup the Email/Password and google sign in.
 
@@ -37,6 +38,7 @@ https://firebase.google.com/
 
 If you are having trouble setting this up, feel free to use the values from the video demo or reach out on: mlu415@aucklanduni.ac.nz, Ill be more than happy to help! :) 
 
+```
 apiKey: "YOUR API KEY",
 authDomain: "YOUR AUTH DOMAIN",
 projectId: "YOUR PROJECT ID",
@@ -44,12 +46,14 @@ storageBucket: "YOUR STORAGE BUCKET",
 messagingSenderId: "YOUR MESSAGING SENDER ID",
 appId: "YOUR APP ID",
 measurementId: "YOUR MEASUREMENT ID",
+```
 
 ### 6. Run the application.
 
 On Client Side:
+```
 npm run dev
-
+```
 On Server Side:
 No Server side required to run. (Unnecessary code from Video Demo has been omitted for simplicity to follow)
 
@@ -66,6 +70,8 @@ Add a firebase collection called "users" with role of string type
 ### 8. Update User to Admin
 
 After a user has signed up a new document will appear in the user collection, Edit this so instead of "user", it is "admin" (make sure to update the right doc!)
+
+![image](https://user-images.githubusercontent.com/61758778/230800412-dbe56a85-c406-40bb-85cf-1dab7447284b.png)
 
 Relogin and the new admin user and you should be able to see the "Admin only section"
 
