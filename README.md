@@ -27,9 +27,7 @@ npm install
 
 3. Setup the Email/Password and google sign in.
 
-image.png
-
-image.png
+<img width="703" alt="image" src="https://user-images.githubusercontent.com/61758778/230800179-81b2eef8-2dab-4b0a-8ddd-e0e1407fff7b.png">
 
 4. Create a Firebase project and add a web app to it.
 
@@ -37,7 +35,7 @@ https://firebase.google.com/
 
 5. Copy the Firebase configuration object from the Firebase console and paste in the /firebase/firebase.ts.
 
-If you are having trouble setting this up, feel free to reach out on: mlu415@aucklanduni.ac.nz, ill be more than happy to help!
+If you are having trouble setting this up, feel free to use the values from the video demo or reach out on: mlu415@aucklanduni.ac.nz, Ill be more than happy to help! :) 
 
 apiKey: "YOUR API KEY",
 authDomain: "YOUR AUTH DOMAIN",
@@ -59,11 +57,11 @@ The application will be available at http://localhost:5173.
 
 8. Create a Cloud Firestore
 
-image.png
+<img width="747" alt="image" src="https://user-images.githubusercontent.com/61758778/230800161-5482158b-7bb0-4507-8712-f62234f49632.png">
 
 Add a firebase collection called "users" with role of string type
 
-image.png
+<img width="504" alt="image" src="https://user-images.githubusercontent.com/61758778/230800156-e52b7975-6685-4794-bf55-a5869a8654fc.png">
 
 9. Update User to Admin
 
@@ -71,7 +69,7 @@ After a user has signed up a new document will appear in the user collection, Ed
 
 Relogin and the new admin user and you should be able to see the "Admin only section"
 
-image.png
+<img width="424" alt="image" src="https://user-images.githubusercontent.com/61758778/230800143-38f1fb8c-b6c5-4854-afcc-3c6b6d5ebb3d.png">
 
 10. Extra
 
