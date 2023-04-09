@@ -4,6 +4,9 @@ This is a sample React application that demonstrates how to add user authenticat
 
 Please note that this tech demo will be focused on the firebase authentication library, and will not run you through how to set up a login and registration page and associated styling due to time constraints, you can copy the files from this project, or find an alternative online!
 
+Heres a video to walk you through the project:
+https://www.youtube.com/watch?v=7fg2KkPAWu0 
+
 ## Technologies Used
 
 - React
@@ -36,7 +39,7 @@ https://firebase.google.com/
 
 ### 5. Copy the Firebase configuration object from the Firebase console and paste in the /firebase/firebase.ts.
 
-If you are having trouble setting this up, feel free to use the values from the video demo or reach out on: mlu415@aucklanduni.ac.nz, Ill be more than happy to help! :) 
+If you are having trouble setting this up, feel free to reach out to: mlu415@aucklanduni.ac.nz, Ill be more than happy to help! :) 
 
 ```
 apiKey: "YOUR API KEY",
